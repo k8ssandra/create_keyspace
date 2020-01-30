@@ -3,6 +3,7 @@ import os
 import json
 import logging
 from cassandra.cluster import Cluster
+from cassandra.auth import PlainTextAuthProvider
 
 logger = logging.getLogger('create_keyspace')
 logger.setLevel(logging.INFO)
@@ -25,6 +26,7 @@ logger.info("keyspace = %s", keyspace)
 logger.info("contact_points = %s", contact_points)
 logger.info("replication = %s", replication)
 
-cluster = Cluster(contact_points)
+auth_provider = PlainTextAuthProvider(username="cassandra", password="cassandra")
+cluster = Cluster(contact_points, auth_provider=auth_provider)
 session = cluster.connect()
 session.execute("CREATE KEYSPACE IF NOT EXISTS {0} WITH REPLICATION = {1}".format(keyspace, replication))
