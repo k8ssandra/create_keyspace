@@ -22,6 +22,7 @@ def create_table(table_name, table_def):
   logger.info("Creating {}.{} table".format(keyspace, table_name))
   session.execute("CREATE TABLE IF NOT EXISTS {}.{}{}".format(keyspace, table_name, table_def))
 
+logger.info("Running {}".format(sys.argv[0]))
 
 keyspace = getenv("KEYSPACE")
 contact_points = getenv("CONTACT_POINTS").split(",")
