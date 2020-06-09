@@ -20,12 +20,12 @@ def getenv(name):
 
 def create_table(table_name, table_def):
   logger.info("Creating {}.{} table".format(keyspace, table_name))
-  session.execute("CREATE TABLE {}.{} {}".format(keyspace, table_name, table_def))
+  session.execute("CREATE TABLE IF NOT EXISTS {}.{}{}".format(keyspace, table_name, table_def))
 
 
 keyspace = getenv("KEYSPACE")
 contact_points = getenv("CONTACT_POINTS").split(",")
-replication = getenv("REPLICATION")
+replication = getenv("REPLICATION_FACTOR")
 
 logger.info("keyspace = %s", keyspace)
 logger.info("contact_points = %s", contact_points)
