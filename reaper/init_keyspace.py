@@ -25,7 +25,7 @@ def create_table(table_name, table_def):
 
 keyspace = getenv("KEYSPACE")
 contact_points = getenv("CONTACT_POINTS").split(",")
-replication = getenv("REPLICATION_FACTOR")
+replication = getenv("REPLICATION")
 
 logger.info("keyspace = %s", keyspace)
 logger.info("contact_points = %s", contact_points)
