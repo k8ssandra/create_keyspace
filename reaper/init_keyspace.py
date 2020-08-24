@@ -32,7 +32,10 @@ logger.info("keyspace = %s", keyspace)
 logger.info("contact_points = %s", contact_points)
 logger.info("replication = %s", replication)
 
-auth_provider = PlainTextAuthProvider(username="cassandra", password="cassandra")
+username = getenv("USERNAME", "cassandra")
+password = getenv("PASSWORD", "cassandra")
+
+auth_provider = PlainTextAuthProvider(username=username, password=password)
 cluster = Cluster(contact_points, auth_provider=auth_provider)
 session = cluster.connect()
 session.execute("CREATE KEYSPACE IF NOT EXISTS {0} WITH REPLICATION = {1}".format(keyspace, replication))
