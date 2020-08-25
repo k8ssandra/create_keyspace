@@ -32,8 +32,8 @@ logger.info("keyspace = %s", keyspace)
 logger.info("contact_points = %s", contact_points)
 logger.info("replication = %s", replication)
 
-username = getenv("USERNAME", "cassandra")
-password = getenv("PASSWORD", "cassandra")
+username = getenv("USERNAME", default="cassandra")
+password = getenv("PASSWORD", default="cassandra")
 
 auth_provider = PlainTextAuthProvider(username=username, password=password)
 cluster = Cluster(contact_points, auth_provider=auth_provider)
