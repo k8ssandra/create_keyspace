@@ -7,4 +7,4 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 ADD . /app
 WORKDIR /app
 
-CMD ["python", "/app/create_keyspace.py"]
+CMD ["python", "/app/init_keyspace.py"]

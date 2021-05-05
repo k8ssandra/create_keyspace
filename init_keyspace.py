@@ -12,8 +12,8 @@ ch = logging.StreamHandler()
 ch.setLevel(logging.INFO)
 logger.addHandler(ch)
 
-def getenv(name):
-  value = os.getenv(name)
+def getenv(name, fallback=None):
+  value = os.getenv(name, default=fallback)
   if not value:
     raise Exception("The environment variable {0} is undefined".format(name))
   return str(value)
@@ -32,8 +32,8 @@ logger.info("keyspace = %s", keyspace)
 logger.info("contact_points = %s", contact_points)
 logger.info("replication = %s", replication)
 
-username = getenv("USERNAME", default="cassandra")
-password = getenv("PASSWORD", default="cassandra")
+username = getenv("USERNAME", fallback="cassandra")
+password = getenv("PASSWORD", fallback="cassandra")
 
 auth_provider = PlainTextAuthProvider(username=username, password=password)
 cluster = Cluster(contact_points, auth_provider=auth_provider)
